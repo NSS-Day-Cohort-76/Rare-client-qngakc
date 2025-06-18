@@ -1,0 +1,13 @@
+export const getAllPosts = () => {
+    return fetch(`http://localhost:8088/posts`).then((res) => res.json())
+}
+
+export const createPost = (postData) => {
+  return fetch("http://localhost:8088/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postData)
+  }).then((res) => res.json());
+};
