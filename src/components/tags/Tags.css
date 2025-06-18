@@ -1,14 +1,21 @@
 .tags-table {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     padding: 1rem;
+       overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
     
 }
 
 .tags-column {
     flex: 1;
     justify-self: center;
-    
+    height: 50%;
+    overflow-y: scroll;
+    border: 1 px black;
+  
 }
 .tags-column h2 {
     flex: 1;
@@ -18,11 +25,12 @@
 .map-item {
     flex: 1;
     border: 1px solid black;
-    padding: 1em;
-    width: 20em;
+    padding: .5em;
+    width: 30em;
     flex-direction: row;
     justify-self: center;
     align-self: center;
+    
 }
 
 .create-tag {
@@ -40,6 +48,7 @@
     flex-direction: row;
     /* flex: 1; */
     width: 100%;
+    
     
 }
 
