@@ -13,7 +13,13 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route path="/login" element={<Login setToken={setToken} />}  />
       <Route path="/register" element={<Register setToken={setToken} />}  />
       <Route element={<Authorized token={token} />}>
-      <Route path="/posts" element={<AllPosts setToken={setToken} />}  />
+        <Route path="/posts" element={<AllPosts setToken={setToken} />} />
+          <Route
+            path="/posts/:postId"
+            element={<PostDetails setToken={setToken} />}
+          />
+          <Route path="/myposts" element={<MyPost token={token} />} />
+      <Route path="/tags" element={<AllTags setToken={setToken} />}  />
         
         
       </Route>
