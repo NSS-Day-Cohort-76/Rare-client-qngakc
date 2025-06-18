@@ -4,8 +4,8 @@ import { getAllPosts } from "../../services/postService";
 import { Link } from "react-router-dom";
 
 export const AllPosts = () => {
-    const [allPosts, setAllPosts] = useState();
-    const [orderedPosts, setOrderedPosts] = useState();
+    const [allPosts, setAllPosts] = useState([]);
+    const [orderedPosts, setOrderedPosts] = useState([]);
 
     const today = new Date();
     useEffect(() => {
@@ -43,7 +43,7 @@ export const AllPosts = () => {
                     {return (
             <div className ="row" key={post.id}>
             <div className="column">
-                <Link target="_blank" to={`./posts/${post.id}`}>{post.title}</Link> 
+                <Link target="_blank" to={`/posts/${post.id}`}>{post.title}</Link> 
             </div>
                         <div className="column">
                 {post.author}
