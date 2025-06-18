@@ -1,45 +1,48 @@
 import { useEffect, useState } from "react";
-import { useNavigate} from "react-router-dom"
-import { createTag } from "../services/TagService";
+import { createTag } from "../../services/TagService";
 
-export const CreateNewTag = () => {
+export const CreateNewTag = ({onTagCreated}) => {
 
     const [tag, setTag] = useState({ label: "" })
-    const navigate = useNavigate()
-
     useEffect(()=> {
 
     })
 
     const handleSave = (event) => {
-          event.preventDefault()
-          createTag(tag).then(() => {
-            navigate("/TagList")
+        event.preventDefault()
+        createTag(tag).then((newTag) => {
+            setTag({ label: "" })
+            if (onTagCreated) {
+                onTagCreated(newTag)
+            }
         })
-
     }
 
 
 
 
     return (
-    <div className="main-container">
-        <div className="form-group">
-            <h2>Create A Tag</h2>
-              <input type="text"
-                        className="form-control"
-                        placeholder={`Add Tag Name`}
-                        defaultValue=""
-                        onChange={(event) => {
-                            const copy = { ...tag}
-                            copy.title = event.target.value
-                            setTag(copy)
-                        }}>
-                    </input>
+    <div className="create-tag-form">
+        <div className="field">
+        <label className="label">Create A Tag</label>
+        <div className="control">
+            <input
+            className="input"
+            type="text"
+            placeholder="Add Tag Name"
+            value={tag.label}
+            onChange={e => setTag({ label: e.target.value })}
+            />
         </div>
-        <div className="save-btn">
-            <button className="save-btn" onClick={handleSave}>Save Tag</button>
-        </div>
+</div>
+
+<div className="field">
+  <div className="control">
+    <button className="button is-primary" onClick={handleSave}>
+      Save Tag
+    </button>
+  </div>
+</div>
     </div>
     )
 }
