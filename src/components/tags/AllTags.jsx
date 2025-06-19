@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllTags } from "../../services/TagService"
+import { deleteTag, getAllTags } from "../../services/TagService"
 import { CreateNewTag } from "./CreateTag"
 import "./Tags.css"
 
@@ -13,6 +13,12 @@ useEffect(() => {
  getAllTags().then((data) => setTags(data))   
 }, [])
 
+const handleDelete = (tag) => {
+    deleteTag(tag.id).then(() => {
+    getAllTags().then(setTags)
+})
+}
+
     return (
             <div className="tags-table">
                 <div className="tags-row">
@@ -20,12 +26,13 @@ useEffect(() => {
 
                    
                     <div className="tags-column">
-                    <h2 class="title is-2">Tags</h2>
+                    <h2 className="title is-2">Tags</h2>
                     {tags.map((tag) => (
                         <div className="map-item" key={tag.id}>#<strong>{tag.label}</strong>
                         <div className="btn-container">
                          <button className="button is-small is-info mr-2">Edit</button>
-                         <button className="button is-small is-danger">Delete</button>
+                         <button className="button is-small is-danger"
+                         onClick={() => handleDelete(tag)}>Delete</button>
                         </div>
                         </div>
                     ))}
