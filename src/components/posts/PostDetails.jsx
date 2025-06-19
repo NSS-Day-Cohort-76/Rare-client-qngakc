@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { getPostById } from "../../services/postService";
 import "./PostDetails.css";
 export const PostDetails = () => {
@@ -22,6 +22,8 @@ export const PostDetails = () => {
         <div id="post-date">{post.publication_date}</div>
       </div>
       <div id="post-content">{post.content}</div>
+      <button><Link to={`/posts/${postId}/comments`}>Comments</Link></button>
+      <Outlet/>
     </div>
   );
 };

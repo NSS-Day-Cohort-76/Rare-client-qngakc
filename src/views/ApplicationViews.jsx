@@ -1,10 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import { Login } from "../components/auth/Login";
 import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
 import { AllPosts } from "../components/posts/AllPosts";
 import { PostDetails } from "../components/posts/PostDetails";
 import { MyPost } from "../components/MyPost/mypost.jsx";
+import { Comment } from "../components/comment/comment.jsx";
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -17,7 +18,9 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route
             path="/posts/:postId"
             element={<PostDetails setToken={setToken} />}
-          />
+          >
+            <Route path="comments" element={<Comment token={token}/>} />
+          </Route>
           <Route path="/myposts" element={<MyPost token={token} />} />
         </Route>
       </Routes>
