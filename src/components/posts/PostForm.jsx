@@ -1,38 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { createPost } from "../services/postServices.js";
-import "./CreatePostForm.css"
+import "./CreatePostForm.css";
+import { createPost } from "../../services/postService.js";
+import { getAllCategories } from "../../services/categoryService.js";
 
-export const NewPost = ({ token }) => {
+export const PostForm = ({ token }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [headerImageUrl, setHeaderImageUrl] = useState("");
- 
-  
+  const [categories, setCategories] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getAllCategories()
+      .then(setCategories)
+      .catch((err) => console.error("Failed to load categories:", err));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newPost = {
-        title,
-        content,
-        category: parseInt(category),
-        header_image_url: headerImageUrl,
-        author_id: token.id
+      title,
+      content,
+      category: parseInt(category),
+      header_image_url: headerImageUrl,
+      author_id: token,
     };
 
     createPost(newPost)
-  .then((createdPost) => {
-    if (createdPost?.post_id) {
-      navigate(`/posts/${createdPost.post_id}`);
-    } else {
-      console.warn("Post created but no ID returned.");
-      navigate("/posts");
-    }
-  })
-  .catch((error) => console.error("Failed to create a post:", error));
+      .then((createdPost) => {
+        if (createdPost?.post_id) {
+          navigate(`/posts/${createdPost.post_id}`);
+        } else {
+          console.warn("Post created but no ID returned.");
+          navigate("/posts");
+        }
+      })
+      .catch((error) => console.error("Failed to create a post:", error));
   };
 
   return (
@@ -60,12 +67,18 @@ export const NewPost = ({ token }) => {
 
         <label>
           Category:
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             required
-          />
+          >
+            <option value="">Select a category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.label}
+              </option>
+            ))}
+          </select>
         </label>
 
         <label>
@@ -77,6 +90,7 @@ export const NewPost = ({ token }) => {
             placeholder="Optional"
           />
         </label>
+
         <button type="submit">Save</button>
       </form>
     </div>

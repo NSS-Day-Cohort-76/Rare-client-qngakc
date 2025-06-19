@@ -5,7 +5,7 @@ import { NavBar } from "./components/nav/NavBar"
 
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
-  console.log("Rare is rendering")
+ 
 
   const setToken = (newToken) => {
     console.log("Setting token:", newToken)
