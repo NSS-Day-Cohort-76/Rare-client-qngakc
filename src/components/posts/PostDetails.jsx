@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPostById } from "../../services/postService";
+import { getPostById } from "../../services/postServices.jsx"
 import "./PostDetails.css";
 export const PostDetails = () => {
   const [post, setPost] = useState({});

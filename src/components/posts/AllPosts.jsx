@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "./AllPosts.css"
-import { getAllPosts } from "../../services/postService";
 import { Link } from "react-router-dom";
+import { getAllPost } from "../../services/postServices.js";
 
 export const AllPosts = () => {
     const [allPosts, setAllPosts] = useState([]);
@@ -9,7 +9,7 @@ export const AllPosts = () => {
 
     const today = new Date();
     useEffect(() => {
-        getAllPosts().then(setAllPosts)
+        getAllPost().then(setAllPosts)
     }, [])
 
     useEffect(() => {

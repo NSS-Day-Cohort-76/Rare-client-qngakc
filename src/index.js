@@ -2,7 +2,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Rare } from "./Rare";
 import "./index.css";
-import React from "react";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

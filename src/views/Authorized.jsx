@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 export const Authorized = ({ token }) => {
-  console.log("Authorized token check:", token)
+  console.log("Token in authorized:", token, typeof token)
   if (token) {
     return <Outlet />;
   }
