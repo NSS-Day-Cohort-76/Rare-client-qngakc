@@ -13,3 +13,21 @@ export const getMyPosts = (token) => {
     res.json()
   );
 };
+
+export const createPost = (postData) => {
+  return fetch("http://localhost:8088/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postData)
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    return res.text().then(text => {
+      return text ? JSON.parse(text) : {};
+    });
+  });
+};
