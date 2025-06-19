@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllTags } from "../../services/TagService";
+import { deleteTag, getAllTags } from "../../services/TagService";
 import { CreateNewTag } from "./CreateTag";
 import "./Tags.css";
 
@@ -9,6 +9,12 @@ export const AllTags = () => {
   useEffect(() => {
     getAllTags().then((data) => setTags(data));
   }, []);
+
+  const handleDelete = (tag) => {
+    deleteTag(tag.id).then(() => {
+      getAllTags().then(setTags);
+    });
+  };
 
   return (
     <div className="tags-table">
@@ -20,7 +26,12 @@ export const AllTags = () => {
               #<strong>{tag.label}</strong>
               <div className="btn-container">
                 <button className="button is-small is-info mr-2">Edit</button>
-                <button className="button is-small is-danger">Delete</button>
+                <button
+                  className="button is-small is-danger"
+                  onClick={() => handleDelete(tag)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}

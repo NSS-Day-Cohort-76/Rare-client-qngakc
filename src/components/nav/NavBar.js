@@ -70,15 +70,20 @@ export const NavBar = ({ token, setToken }) => {
           <div className="navbar-item">
             <div className="buttons">
               {token ? (
-                <button
-                  className="button is-outlined"
-                  onClick={() => {
-                    setToken("");
-                    navigate("/login");
-                  }}
-                >
-                  Logout
-                </button>
+                <>
+                  <Link to="/new-post" className="button is-primary">
+                    New Post +
+                  </Link>
+                  <button
+                    className="button is-outlined"
+                    onClick={() => {
+                      setToken("");
+                      navigate("/login");
+                    }}
+                  >
+                    Logout
+                  </button>
+                </>
               ) : (
                 <>
                   <Link to="/register" className="button is-link">
