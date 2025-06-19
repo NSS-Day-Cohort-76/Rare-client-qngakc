@@ -21,7 +21,15 @@ export const NavBar = ({ token, setToken }) => {
         </a>
 
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={showMobileNavbar} ref={hamburger}>
+        <a 
+          role="button" 
+          className="navbar-burger" 
+          aria-label="menu" 
+          aria-expanded="false" 
+          data-target="navbarBasicExample" 
+          onClick={showMobileNavbar} 
+          ref={hamburger}
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -48,19 +56,27 @@ export const NavBar = ({ token, setToken }) => {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              {
-                token
-                  ?
-                  <button className="button is-outlined" onClick={() => {
-                    setToken('')
-                    navigate('/login')
-                  }}>Logout</button>
-                  :
-                  <>
-                    <Link to="/register" className="button is-link">Register</Link>
-                    <Link to="/login" className="button is-outlined">Login</Link>
-                  </>
-              }
+              {token ? (
+                <>
+                  <Link to="/new-post" className="button is-primary">
+                    New Post +
+                  </Link>
+                  <button
+                    className="button is-outlined"
+                    onClick={() => {
+                      setToken('')
+                      navigate('/login')
+                    }}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/register" className="button is-link">Register</Link>
+                  <Link to="/login" className="button is-outlined">Login</Link>
+                </>
+              )}
             </div>
           </div>
         </div>
