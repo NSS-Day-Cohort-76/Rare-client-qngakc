@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { getPostById } from "../../services/postService";
 import "./PostDetails.css";
+
 export const PostDetails = () => {
   const [post, setPost] = useState({});
   const { postId } = useParams();

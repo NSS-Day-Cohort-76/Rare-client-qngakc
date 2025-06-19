@@ -3,6 +3,7 @@ import "./AllPosts.css";
 import { getAllPosts } from "../../services/postService";
 import { Link } from "react-router-dom";
 
+
 export const AllPosts = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [orderedPosts, setOrderedPosts] = useState([]);
