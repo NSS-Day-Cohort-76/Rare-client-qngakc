@@ -3,9 +3,11 @@ import { getAllTags } from "../../services/TagService"
 import { CreateNewTag } from "./CreateTag"
 import "./Tags.css"
 
+
 export const AllTags = () => {
 
 const [tags, setTags] = useState([])
+
 
 useEffect(() => {
  getAllTags().then((data) => setTags(data))   
@@ -14,7 +16,7 @@ useEffect(() => {
     return (
             <div className="tags-table">
                 <div className="tags-row">
-                    <div className="tags-column">
+                  
 
                    
                     <div className="tags-column">
@@ -27,7 +29,7 @@ useEffect(() => {
                         </div>
                         </div>
                     ))}
-                    </div>
+                   
 
                     </div>
 
@@ -36,6 +38,7 @@ useEffect(() => {
                                 <CreateNewTag onTagCreated={(newTag) => setTags(prev => [...prev, newTag])} />
                             </div>
                     </div>
+                   
 
                 </div>
             </div>
