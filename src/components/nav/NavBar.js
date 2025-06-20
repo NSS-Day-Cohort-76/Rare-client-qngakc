@@ -60,6 +60,9 @@ export const NavBar = ({ token, setToken }) => {
               <Link to="/myposts" className="navbar-item">
                 My Posts
               </Link>
+              <Link to="/users" className="navbar-item">
+                User Profiles
+              </Link>
             </>
           ) : (
             ""

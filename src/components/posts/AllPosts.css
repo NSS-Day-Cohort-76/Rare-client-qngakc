@@ -1,22 +1,23 @@
 #posts-table {
-    display: flex;
-    border: 1px solid black;
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 5rem;
-    flex-wrap: wrap;
+  display: flex;
+  border: 1px solid black;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  flex-wrap: wrap;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    width: 20%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 20%;
+  padding: 100px;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    /* flex: 1; */
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* flex: 1; */
+  width: 100%;
 }
