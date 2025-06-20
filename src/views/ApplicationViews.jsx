@@ -10,6 +10,7 @@ import { AllCategories } from "../components/categories/AllCategories.jsx";
 import { Comment } from "../components/comment/comment.jsx";
 // import { AllTags } from "../components/tags/AllTags";
 import { PostForm } from "../components/posts/PostForm.jsx";
+import { AllUserProfiles } from "../components/users/AllUserProfiles.jsx";
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -33,6 +34,10 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route
             path="/categories"
             element={<AllCategories setToken={setToken} />}
+          />
+          <Route
+            path="/users"
+            element={<AllUserProfiles setToken={setToken} />}
           />
         </Route>
       </Routes>

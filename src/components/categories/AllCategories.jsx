@@ -5,6 +5,7 @@ import {
 } from "../../services/categoryService";
 import { CreateNewCategory } from "./CreateCategory";
 import "./Categories.css";
+
 export const AllCategories = () => {
   const [allCategories, setAllCategories] = useState([]);
 
