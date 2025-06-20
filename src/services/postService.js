@@ -31,3 +31,19 @@ export const createPost = (postData) => {
     });
   });
 };
+
+export const deletePost = (id) => {
+  return fetch(`http://localhost:8088/posts/${id}`, {
+    method: "DELETE"
+  })
+}
+
+export const updatePost = (id, postData) => {
+  return fetch(`http://localhost:8088/posts/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postData)
+  })
+}
