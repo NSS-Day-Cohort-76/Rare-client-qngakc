@@ -17,4 +17,15 @@ export const deleteTag = (tagId) => {
     return fetch(`http://localhost:8088/tags/${tagId}`, {
         method: "DELETE",
     })
+} 
+
+
+export const updateTag = (tagId) => {
+    return fetch (`http://localhost:8088/tags${tagId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tagId),
+    }).then(res => res.json())
 }
