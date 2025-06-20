@@ -1,23 +1,64 @@
 #posts-table {
   display: flex;
-  border: 1px solid black;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 5rem;
-  flex-wrap: wrap;
-}
-
-.column {
-  display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  width: 20%;
-  padding: 100px;
+  width: 90%;
+  margin: 5rem auto 0;
+  border: 1px solid #444;
 }
 
 .row {
   display: flex;
-  flex-direction: row;
-  /* flex: 1; */
   width: 100%;
+  border-top: 1px solid #444;
+}
+
+#posts-table .row:first-child {
+  background-color: #222;
+  font-weight: bold;
+}
+
+/* Each "cell" in the table */
+.column {
+  flex: 1;
+  padding: 0.75rem;
+  border-right: 1px solid #444;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.column:last-child {
+  border-right: none;
+}
+
+/* Container for each full row, includes icons */
+.post-row-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Delete + Edit icon column */
+.action-icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+  background-color: none;
+  border-right: 1px solid #444;
+}
+
+/* Buttons */
+.icon-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ccc;
+  margin: 0.2rem 0;
+}
+
+.icon-button:hover {
+  color: crimson;
 }
