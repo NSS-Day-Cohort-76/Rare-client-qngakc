@@ -20,7 +20,6 @@ export const CreateNewTag = ({onTagCreated}) => {
 
 
 
-
     return (
     <div className="create-tag-form">
         <div className="field">
