@@ -10,9 +10,9 @@ export const AllTags = () => {
   const [editingTag, setEditingTag] = useState(null);
   const [editLabel, setEditLabel] = useState("");
 
-useEffect(() => {
- getAllTags().then((data) => setTags(data))   
-}, [])
+  useEffect(() => {
+    getAllTags().then((data) => setTags(data));
+  }, []);
 
 const handleDelete = (tag) => {
     deleteTag(tag.id).then(refreshTags)

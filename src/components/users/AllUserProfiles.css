@@ -1,0 +1,19 @@
+#users-table {
+  display: flex;
+  border: 1px solid black;
+  width: 45%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+#user-title {
+  margin-top: 5rem;
+  text-align: center;
+}
+#user-checks {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border: 1px solid black;
+  width: 20%;
+}
