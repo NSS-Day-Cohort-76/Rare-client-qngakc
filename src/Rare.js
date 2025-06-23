@@ -8,7 +8,6 @@ export const Rare = () => {
  
 
   const setToken = (newToken) => {
-    console.log("Setting token:", newToken)
     localStorage.setItem('auth_token', newToken)
     setTokenState(newToken)
   }
