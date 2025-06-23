@@ -13,3 +13,14 @@ export const postComment = (comment) => {
     body: JSON.stringify(comment),
   }).then((res) => res.json());
 };
+
+
+export const updateComment = (comment, id) => {
+  return fetch(`http://localhost:8088/update_comment/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(comment),
+  }).then((res) => res.json());
+};
