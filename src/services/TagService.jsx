@@ -19,13 +19,17 @@ export const deleteTag = (tagId) => {
     })
 } 
 
-
-export const updateTag = (tagId) => {
-    return fetch (`http://localhost:8088/tags${tagId}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(tagId),
-    }).then(res => res.json())
+export const updateTag = (tagId, tagData) => {
+  return fetch(`http://localhost:8088/tags/${tagId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(tagData),
+  }).then(res => {
+    if (!res.ok) {
+      throw new Error("Failed to update tag")
+    }
+    return res.status === 204 ? null : res.json()
+  })
 }
