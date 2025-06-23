@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./CreatePostForm.css";
 import { createPost } from "../../services/postService.js";
 import { getAllCategories } from "../../services/categoryService.js";
+import { getAllTags } from "../../services/TagService.jsx";
 
 export const PostForm = ({ token }) => {
   const [title, setTitle] = useState("");
@@ -10,6 +11,8 @@ export const PostForm = ({ token }) => {
   const [category, setCategory] = useState("");
   const [headerImageUrl, setHeaderImageUrl] = useState("");
   const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const navigate = useNavigate();
 
@@ -17,6 +20,10 @@ export const PostForm = ({ token }) => {
     getAllCategories()
       .then(setCategories)
       .catch((err) => console.error("Failed to load categories:", err));
+
+    getAllTags()
+      .then(setTags)
+      .catch((err) => console.error("Failed to load tags:", err));
   }, []);
 
   const handleSubmit = (e) => {
@@ -28,6 +35,7 @@ export const PostForm = ({ token }) => {
       category: parseInt(category),
       header_image_url: headerImageUrl,
       author_id: token,
+      tag_ids: selectedTags,
     };
 
     createPost(newPost)
@@ -90,6 +98,27 @@ export const PostForm = ({ token }) => {
             placeholder="Optional"
           />
         </label>
+        <label>Tags:</label>
+        <div>
+          {tags.map((tag) => (
+            <label key={tag.id} style={{ display: "block" }}>
+              <input
+                type="checkbox"
+                value={tag.id}
+                checked={selectedTags.includes(tag.id)}
+                onChange={(e) => {
+                  const tagId = parseInt(e.target.value);
+                  setSelectedTags((prev) =>
+                    e.target.checked
+                      ? [...prev, tagId]
+                      : prev.filter((id) => id !== tagId)
+                  );
+                }}
+              />
+              {tag.label}
+            </label>
+          ))}
+        </div>
 
         <button type="submit">Save</button>
       </form>
