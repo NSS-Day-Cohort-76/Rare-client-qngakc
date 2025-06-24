@@ -70,7 +70,7 @@ export const AllCategories = () => {
             <div className="map-item" key={cat.id}>
               <strong>{cat.label}</strong>
               <div className="btn-container">
-                <button className="button is-small is-info mr-2">Edit</button>
+                <button className="button is-small is-info mr-2" onClick={() => handleEditClick(cat)}>Edit</button>
                 <button
                   className="button is-small is-danger"
                   value={cat.id}
