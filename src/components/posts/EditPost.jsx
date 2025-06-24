@@ -36,7 +36,7 @@ export const EditPost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const updatedPost = {
       title,
       content,
