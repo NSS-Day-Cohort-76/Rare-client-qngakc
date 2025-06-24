@@ -12,6 +12,7 @@ import { PostForm } from "../components/posts/PostForm.jsx";
 // import { EditComment } from "../components/comment/EditComment.jsx";
 import { EditPost } from "../components/posts/EditPost.jsx";
 import { AllUserProfiles } from "../components/users/AllUserProfiles.jsx";
+import { AllReactions } from "../components/reactions/AllReactions.jsx";
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -33,6 +34,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           </Route>
           <Route path="/myposts" element={<MyPost token={token} />} />
           <Route path="/tags" element={<AllTags setToken={setToken} />} />
+          <Route path="/reactions" element={<AllReactions token={token} />} />
           {/* <Route path="/edit_comment/:commentId" element={<EditComment/>}/> */}
           <Route
             path="/categories"
