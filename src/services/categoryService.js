@@ -20,3 +20,19 @@ export const deleteCategory = (pk) => {
     },
   });
 };
+
+export const updateCategory = (catId, catData) => {
+  return fetch(`http://localhost:8088/categories/${catId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(catData),
+  }).then(res => {
+    if (!res.ok) {
+      throw new Error("Failed to update tag")
+    }
+    return res.status === 204 ? null : res.json()
+  })
+
+}
