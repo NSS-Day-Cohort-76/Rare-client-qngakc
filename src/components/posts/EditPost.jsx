@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getPostById, updatePost } from "../../services/postService";
+import { getPostById, updatePost} from "../../services/postService";
 import { getAllCategories } from "../../services/categoryService.js";
 import { getAllTags } from "../../services/TagService.jsx";
 
@@ -38,8 +38,8 @@ export const EditPost = () => {
     e.preventDefault();
   
     const updatedPost = {
-      title,
-      content,
+      title: title,
+      content: content,
       category_id: parseInt(category),
       header_image_url: headerImageUrl,
       tag_ids: selectedTags,

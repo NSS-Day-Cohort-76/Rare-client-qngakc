@@ -3,6 +3,7 @@ import {
   displayComments,
   updateComment,
   postComment,
+  deleteComment,
 } from "../../services/commentService.js";
 import { Link, useParams } from "react-router-dom";
 
@@ -48,6 +49,12 @@ export const Comment = ({ token }) => {
       closeModal();
     });
   };
+
+  const handleDelete = (e) => {
+    deleteComment(e).then(() => {
+      setRerender(!rerender);
+    });
+  };
   return (
     <>
       <div>
@@ -88,7 +95,20 @@ export const Comment = ({ token }) => {
                         >
                           Edit
                         </button>
-                        <form onSubmit={handleUpdateComment}>
+                        <button
+                          className="button"
+                          onClick={() => {
+                            handleDelete(comments.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                        <form
+                          onSubmit={(e) => {
+                            handleUpdateComment();
+                            setRerender(!rerender);
+                          }}
+                        >
                           <div
                             className={`modal ${
                               isModalActive ? "is-active" : ""
