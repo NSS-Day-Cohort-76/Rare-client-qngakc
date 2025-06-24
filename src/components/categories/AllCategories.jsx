@@ -84,7 +84,7 @@ export const AllCategories = () => {
         </div>
 
         <div className="tags-column">
-          <div className="create-tag">
+          <div className="create-category">
             {!editingCategory && (
               <CreateNewCategory
                 onCategoryCreated={(newCat) =>
@@ -95,7 +95,7 @@ export const AllCategories = () => {
 
             {editingCategory && (
               <div className="create-category">
-                <h3 className="title is=4">Edit Tag</h3>
+                <h3 className="title is=4">Edit Category</h3>
 
                 <form>
                   <div className="field">
