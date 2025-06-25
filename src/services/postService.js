@@ -1,3 +1,5 @@
+import { createContext } from "react";
+
 export const getAllPosts = () => {
   return fetch("http://localhost:8088/posts").then((res) => res.json());
 };
@@ -46,4 +48,15 @@ export const updatePost = (id, postData) => {
     },
     body: JSON.stringify(postData)
   })
+}
+
+
+export const updatePostAdminApproval = (approval, id) => {
+  return fetch(`http://localhost:8088/posts/${id}`, {
+    method: "PUT", 
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify(approval)
+  }).then(res => res.json())
 }
