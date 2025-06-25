@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import "./AllPosts.css";
-import { deletePost, getAllPosts, updatePostAdminApproval } from "../../services/postService";
+import {
+  deletePost,
+  getAllPosts,
+  updatePostAdminApproval,
+} from "../../services/postService";
 import { Link, useNavigate } from "react-router-dom";
 import { getOneUser } from "../../services/userService.jsx";
 
@@ -16,11 +20,11 @@ export const AllPosts = ({ token }) => {
   useEffect(() => {
     getAllPosts().then((post) => {
       setAllPosts(post);
-        const initialChecked = {}
-        post.forEach((posts) => {
-            initialChecked[posts.id] = posts.approved === 1;
-        })
-        setChecked(initialChecked)
+      const initialChecked = {};
+      post.forEach((posts) => {
+        initialChecked[posts.id] = posts.approved === 1;
+      });
+      setChecked(initialChecked);
     });
   }, []);
 
@@ -45,19 +49,12 @@ export const AllPosts = ({ token }) => {
     navigate(`/posts/${id}/edit`);
   };
 
-    const updatedPostApproval = (postId) => {
-    if (checked === true) {
-      const updatedPost = {
-        approved: 1,
-      };
-      updatePostAdminApproval(updatedPost, postId);
-    } else {
-      const updatedPost = {
-        approved: 0,
-      };
-
-      updatePostAdminApproval(updatedPost, postId);
-    }
+  const updatedPostApproval = (postId) => {
+    const isChecked = checked[postId];
+    const updatedPost = {
+      approved: isChecked ? 0 : 1,
+    };
+    updatePostAdminApproval(updatedPost, postId);
   };
 
   const userId = parseInt(token);
@@ -114,7 +111,7 @@ export const AllPosts = ({ token }) => {
                               ...prev,
                               [post.id]: !prev[post.id],
                             }));
-                            updatedPostApproval(post.id)
+                            updatedPostApproval(post.id);
                           }}
                         />
                         <p>{checked[post.id] ? "True" : "False"}</p>

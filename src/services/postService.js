@@ -58,5 +58,5 @@ export const updatePostAdminApproval = (approval, id) => {
       "Content-Type" : "application/json"
     },
     body: JSON.stringify(approval)
-  })
+  }).then(res => res.json())
 }
