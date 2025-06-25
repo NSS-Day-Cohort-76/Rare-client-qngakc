@@ -61,7 +61,7 @@ return (
       <div className="tags-column">
         <h2 className="title is-2">Tags</h2>
         {tags.map((tag) => (
-          <div className="map-item" key={tag.id}>#<strong>{tag.label}</strong>
+          <div className="map-item" key={tag.id}><strong>#{tag.label}</strong>
             <div className="btn-container">
               <button className="button is-small is-info mr-2" onClick={() => handleEditClick(tag)}>Edit</button>
               <button className="button is-small is-danger"

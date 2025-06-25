@@ -1,54 +1,65 @@
 .Emoji_reaction_manage {
     font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
 .img-reaction-manage {
-    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.tags-column {
-    flex: 1;
-    justify-self: center;
-    height: 50%;
-    overflow-y: scroll;
-    border: 1 px black;
-  
+.h2-box h2{
+    text-justify: center;
+    display: flex;
+    align-content: center;
 }
-.tags-column h2 {
-    flex: 1;
-    justify-self: center;
+
+.reactions-column {
+  flex: 1;
+  height: 400px;
+  overflow-y: scroll;
+  min-width: 0;
+  background-color: rgb(255, 251, 245)
 }
 
 .map-item {
+    display: flex;
     flex: 1;
     border: 1px solid black;
     padding: .5em;
     width: 30em;
+    height: 5em;
     flex-direction: row;
-    justify-self: center;
-    align-self: center;
-    
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
 }
 
-.create-tag {
-    flex: 1;
-    background-color: aliceblue;
-    text-align: center;
-    justify-self: center;
-    align-self: center;
-    width: 50%;
-    border-radius: 1rem;
-    
-}
-
-.tags-row {
+.create-column {
+    background-color: rgb(228, 142, 107);
     display: flex;
-    flex-direction: row;
-    /* flex: 1; */
-    width: 100%;
-    
-    
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 1em;
+    border-radius: 1rem;
+    height: 25em;
+}
+
+.reactions-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90%;
+  height: 100vh; /* or 100% if parent has a defined height */
+  gap: 5em;
+  margin-top: 8em;
 }
 
 .create-reaction-form {
@@ -59,6 +70,8 @@
   gap: 1rem;
   padding: 1rem;
   text-align: center;
+  color: rgb(255, 255, 255);
+  padding: 1em;
 }
 
 
@@ -67,3 +80,20 @@
     flex-direction: row;
     justify-self: flex-end;
 }
+
+
+.action-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
