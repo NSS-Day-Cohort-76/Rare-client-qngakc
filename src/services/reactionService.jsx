@@ -11,3 +11,9 @@ export const createNewReaction = (reaction) => {
         body: JSON.stringify(reaction)
     }).then(res => res.json())
 }
+
+export const deleteReaction = (reactionId) => {
+    return fetch(`http://localhost:8088/reactions/${reactionId}`, {
+        method: "DELETE",
+    })
+} 
