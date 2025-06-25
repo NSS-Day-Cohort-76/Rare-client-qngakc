@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import { getAllReactions } from "../../services/reactionService"
+import { CreateReaction } from "./CreateReaction";
+import "./Reactions.css"
 
 export const AllReactions = () => {
 
@@ -20,11 +22,14 @@ export const AllReactions = () => {
                     {reactions.map((reaction) => (
                         <div className="map-item" key={reaction.id}>
                             <p>{reaction.label}</p>
-                            <img src={reaction.image_url} alt={reaction.label} /></div>
+                            {reaction.emoji ?
+                            <span className="Emoji_reaction_manage" alt={reaction.label}>{reaction.emoji}
+                            </span> : <img className="img-reaction-manage" src={reaction.img_url} alt="reaction.label"/>}
+                        </div>
                     ))}
                 </div>
             </div>
-            
+             <CreateReaction />
         </div>
     )
 }
