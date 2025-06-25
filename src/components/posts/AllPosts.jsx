@@ -21,9 +21,9 @@ export const AllPosts = ({ token }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [checked, setChecked] = useState(false);
   const [admin, setAdmin] = useState({});
-  //  working to add checkboxes that are filled by the previous approved value for each post  const [allCategories, setAllCategories] = useState([]);
-  const navigate = useNavigate();;
-
+  //  working to add checkboxes that are filled by the previous approved value for each post
+  const navigate = useNavigate();
+  const userId = parseInt(token);
   const today = new Date();
 
   useEffect(() => {
@@ -49,13 +49,6 @@ export const AllPosts = ({ token }) => {
     getAllUsers().then(setAllUsers);
   }, []);
 
-  // useEffect(() => {
-  //   const orderPosts = allPosts?.toSorted(
-  //     (a, b) => new Date(a.publication_date) - new Date(b.publication_date)
-  //   );
-  //   setOrderedPosts(orderPosts);
-  // }, [allPosts]);
-
   useEffect(() => {
     getOneUser(token).then(setAdmin);
   }, [token]);
@@ -77,7 +70,6 @@ export const AllPosts = ({ token }) => {
     };
     updatePostAdminApproval(updatedPost, postId);
   };
-
 
   const filteredPosts = allPosts
     .filter((post) => {
@@ -106,110 +98,108 @@ export const AllPosts = ({ token }) => {
       (a, b) => new Date(b.publication_date) - new Date(a.publication_date)
     );
 
-    const userId = parseInt(token);
-
   return (
-  <>
-    <select
-      value={selectedCategory || ""}
-      onChange={(e) => setSelectedCategory(e.target.value || null)}
-    >
-      <option value="">All Categories</option>
-      {allCategories.map((category) => (
-        <option key={category.id} value={category.label}>
-          {category.label}
-        </option>
-      ))}
-    </select>
+    <>
+      <select
+        value={selectedCategory || ""}
+        onChange={(e) => setSelectedCategory(e.target.value || null)}
+      >
+        <option value="">All Categories</option>
+        {allCategories.map((category) => (
+          <option key={category.id} value={category.label}>
+            {category.label}
+          </option>
+        ))}
+      </select>
 
-    <select
-      value={selectedUser || ""}
-      onChange={(e) => setSelectedUser(e.target.value || null)}
-    >
-      <option value="">All Users</option>
-      {allUsers.map((author) => (
-        <option
-          key={author.id}
-          value={`${author.first_name} ${author.last_name}`}
-        >
-          {author.first_name} {author.last_name}
-        </option>
-      ))}
-    </select>
+      <select
+        value={selectedUser || ""}
+        onChange={(e) => setSelectedUser(e.target.value || null)}
+      >
+        <option value="">All Users</option>
+        {allUsers.map((author) => (
+          <option
+            key={author.id}
+            value={`${author.first_name} ${author.last_name}`}
+          >
+            {author.first_name} {author.last_name}
+          </option>
+        ))}
+      </select>
 
-    <select
-      value={selectedTag || ""}
-      onChange={(e) => setSelectedTag(e.target.value || null)}
-    >
-      <option value="">All Tags</option>
-      {allTags.map((tag) => (
-        <option key={tag.id} value={tag.label}>
-          {tag.label}
-        </option>
-      ))}
-    </select>
+      <select
+        value={selectedTag || ""}
+        onChange={(e) => setSelectedTag(e.target.value || null)}
+      >
+        <option value="">All Tags</option>
+        {allTags.map((tag) => (
+          <option key={tag.id} value={tag.label}>
+            {tag.label}
+          </option>
+        ))}
+      </select>
 
-    <article id="all-posts-container">
-      <div id="posts-table">
-        <div className="row">
-          <div className="column"></div>
-          <div className="column">Title</div>
-          <div className="column">Author</div>
-          <div className="column">Date</div>
-          <div className="column">Category</div>
-          <div className="column">Tags</div>
-          {admin.admin_id && <div className="column">Approved</div>}
-        </div>
+      <article id="all-posts-container">
+        <div id="posts-table">
+          <div className="row">
+            <div className="column"></div>
+            <div className="column">Title</div>
+            <div className="column">Author</div>
+            <div className="column">Date</div>
+            <div className="column">Category</div>
+            <div className="column">Tags</div>
+            {admin.admin_id && <div className="column">Approved</div>}
+          </div>
 
-        {filteredPosts.map((post) => (
-          <div className="post-row-container" key={post.id}>
-            {post.author_id === userId && (
-              <div className="action-icons">
-                <button
-                  className="icon-button"
-                  onClick={() => handleDelete(post.id)}
-                  title="Delete Post"
-                >
-                  🗑️
-                </button>
-                <button
-                  className="icon-button"
-                  onClick={() => handleEdit(post.id)}
-                  title="Edit Post"
-                >
-                  ⚙️
-                </button>
-              </div>
-            )}
-            <div className="row">
-              <div className="column">
-                <Link to={`/posts/${post.id}`}>{post.title}</Link>
-              </div>
-              <div className="column">{post.author}</div>
-              <div className="column">{post.publication_date}</div>
-              <div className="column">{post.category}</div>
-              <div className="column">{post.tags}</div>
-              {admin.admin_id && (
-                <div className="column">
-                  <input
-                    type="checkbox"
-                    checked={checked[post.id] || false}
-                    onChange={() => {
-                      setChecked((prev) => ({
-                        ...prev,
-                        [post.id]: !prev[post.id],
-                      }));
-                      updatedPostApproval(post.id);
-                    }}
-                  />
-                  <p>{checked[post.id] ? "True" : "False"}</p>
+          {filteredPosts.map((post) => (
+            <div className="post-row-container" key={post.id}>
+              {post.author_id === userId && (
+                <div className="action-icons">
+                  <button
+                    className="icon-button"
+                    onClick={() => handleDelete(post.id)}
+                    title="Delete Post"
+                  >
+                    🗑️
+                  </button>
+                  <button
+                    className="icon-button"
+                    onClick={() => handleEdit(post.id)}
+                    title="Edit Post"
+                  >
+                    ⚙️
+                  </button>
                 </div>
               )}
+              <div className="row">
+                <div className="column">
+                  <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                </div>
+                <div className="column">{post.author}</div>
+                <div className="column">{post.publication_date}</div>
+                <div className="column">{post.category}</div>
+                <div className="column">{post.tags}</div>
+                {admin.admin_id && (
+                  <div className="column">
+                    <input
+                      type="checkbox"
+                      checked={checked[post.id] || false}
+                      onChange={() => {
+                        setChecked((prev) => ({
+                          ...prev,
+                          [post.id]: !prev[post.id],
+                        }));
+                        updatedPostApproval(post.id);
+                      }}
+                    />
+                    <p>{checked[post.id] ? "True" : "False"}</p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </article>
-  </>
-);
-}
+          ))}
+        </div>
+      </article>
+    </>
+  );
+};
