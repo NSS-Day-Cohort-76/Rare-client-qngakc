@@ -12,6 +12,7 @@ import { PostForm } from "../components/posts/PostForm.jsx";
 // import { EditComment } from "../components/comment/EditComment.jsx";
 import { EditPost } from "../components/posts/EditPost.jsx";
 import { AllUserProfiles } from "../components/users/AllUserProfiles.jsx";
+import { UserProfileView } from "../components/users/userProfileView.jsx";
 import { AllReactions } from "../components/reactions/AllReactions.jsx";
 
 export const ApplicationViews = ({ token, setToken }) => {
@@ -24,7 +25,10 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} />}>
           <Route path="/posts" element={<AllPosts token={token} />} />
-          <Route path="/posts/:postId/edit" element={<EditPost token={token} />} />
+          <Route
+            path="/posts/:postId/edit"
+            element={<EditPost token={token} />}
+          />
           <Route path="/new-post" element={<PostForm token={token} />} />
           <Route
             path="/posts/:postId"
@@ -42,9 +46,9 @@ export const ApplicationViews = ({ token, setToken }) => {
           />
           <Route
             path="/users"
-            element={<AllUserProfiles setToken={setToken} />}
-          />
-        </Route>
+            element={<AllUserProfiles setToken={setToken} />}/>
+            <Route path="users/:userId" element={<UserProfileView token={token} />} />
+          </Route>
       </Routes>
     </>
   );
