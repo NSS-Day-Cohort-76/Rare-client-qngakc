@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/userService";
 import "./AllUserProfiles.css";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+
 export const AllUserProfiles = () => {
   const [users, setUsers] = useState([]);
 
@@ -43,7 +44,7 @@ export const AllUserProfiles = () => {
                     </>
                   ) : (
                     <>
-                      <input type="radio" readOnly /> Author
+                      <input type="radio" readOnly name="admin" /> Author
                     </>
                   )}
                 </div>
