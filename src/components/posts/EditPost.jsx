@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getPostById, updatePost} from "../../services/postService";
+import {
+  getPostById,
+  updatePost,
+  updatePostAdminApproval,
+} from "../../services/postService";
 import { getAllCategories } from "../../services/categoryService.js";
 import { getAllTags } from "../../services/TagService.jsx";
 
@@ -12,6 +16,7 @@ export const EditPost = () => {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [checked, setChecked] = useState(false);
 
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -23,26 +28,27 @@ export const EditPost = () => {
       setCategory(post.category_id);
       setHeaderImageUrl(post.image_url || "");
 
-    const tagIds = post.tags?.map(tag => tag.id) || [];
-    setSelectedTags(tagIds)
-  });
+      const tagIds = post.tags?.map((tag) => tag.id) || [];
+      setSelectedTags(tagIds);
+    });
 
     getAllCategories().then(setCategories);
   }, [postId]);
 
   useEffect(() => {
-    getAllTags().then(setTags)
-  }, [])
+    getAllTags().then(setTags);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+    if(checked === true){
     const updatedPost = {
       title: title,
       content: content,
       category_id: parseInt(category),
       header_image_url: headerImageUrl,
       tag_ids: selectedTags,
+      approved: 1
     };
 
     updatePost(postId, updatedPost)
@@ -52,7 +58,27 @@ export const EditPost = () => {
       .catch((error) => {
         console.error("Failed to update post:", error);
       });
+    }
+    else {
+          const updatedPost = {
+      title: title,
+      content: content,
+      category_id: parseInt(category),
+      header_image_url: headerImageUrl,
+      tag_ids: selectedTags,
+      approved: 0
+    };
+
+    updatePost(postId, updatedPost)
+      .then(() => {
+        navigate(`/posts/${postId}`);
+      })
+      .catch((error) => {
+        console.error("Failed to update post:", error);
+      });
+    }
   };
+
 
   return (
     <div className="form-container">
@@ -102,27 +128,26 @@ export const EditPost = () => {
           />
         </label>
 
-        
         <label>Tags:</label>
         <div>
           {tags.map((tag) => (
-  <label key={tag.id} style={{ display: "block" }}>
-    <input
-      type="checkbox"
-      value={tag.id}
-      checked={selectedTags.includes(tag.id)}
-      onChange={(e) => {
-        const tagId = parseInt(e.target.value);
-        setSelectedTags((prev) =>
-          e.target.checked
-            ? [...prev, tagId]
-            : prev.filter((id) => id !== tagId)
-        );
-      }}
-    />
-    {tag.label}
-  </label>
-))}
+            <label key={tag.id} style={{ display: "block" }}>
+              <input
+                type="checkbox"
+                value={tag.id}
+                checked={selectedTags.includes(tag.id)}
+                onChange={(e) => {
+                  const tagId = parseInt(e.target.value);
+                  setSelectedTags((prev) =>
+                    e.target.checked
+                      ? [...prev, tagId]
+                      : prev.filter((id) => id !== tagId)
+                  );
+                }}
+              />
+              {tag.label}
+            </label>
+          ))}
         </div>
 
         <button type="submit">Save Changes</button>
