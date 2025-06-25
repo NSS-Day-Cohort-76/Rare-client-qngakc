@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 export const UserProfileView = ({ token }) => {
   const [users, setUsers] = useState([]);
+  const [subscribed, setSubscribed] = useState(false)
   const { userId } = useParams();
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export const UserProfileView = ({ token }) => {
           {token === userId ? (
             ""
           ) : (
-            <button onClick={handleSubscribe}>Subscribe</button>
+            <button onClick={() => {handleSubscribe(); setSubscribed(!subscribed) }}>{subscribed ? "Unsubscribe" : "Subscribe"}</button>
           )}
         </div>
       </div>
