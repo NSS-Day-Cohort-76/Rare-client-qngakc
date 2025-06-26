@@ -49,3 +49,13 @@ export const toggleActiveStatus = (userId, status) => {
     body: JSON.stringify({ active: status }),
   });
 };
+
+export const toggleAdminStatus = (userId, status) => {
+  return fetch(`http://localhost:8088/users_admin/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ is_admin: status }),
+  });
+};
