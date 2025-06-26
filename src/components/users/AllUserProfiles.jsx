@@ -3,7 +3,6 @@ import { getAllUsers } from "../../services/userService";
 import "./AllUserProfiles.css";
 import { Link, Outlet } from "react-router-dom";
 
-
 export const AllUserProfiles = () => {
   const [users, setUsers] = useState([]);
 
@@ -26,15 +25,39 @@ export const AllUserProfiles = () => {
                 {user.first_name} {user.last_name}
               </div>
               <div className="column">
-                <input type="checkbox" /> Active
+                {user.active === 1 ? (
+                  <>
+                    <input type="checkbox" checked readOnly /> Active
+                  </>
+                ) : (
+                  <>
+                    <input type="checkbox" readOnly /> Active
+                  </>
+                )}
               </div>
+
               <div className="column" id="user-checks">
                 <div>
-                  <input type="radio" name="admin"/> Author
+                  {user.is_admin === 0 ? (
+                    <>
+                      <input type="radio" checked readOnly /> Author
+                    </>
+                  ) : (
+                    <>
+                      <input type="radio" readOnly name="admin" /> Author
+                    </>
+                  )}
                 </div>
                 <div>
-                  {" "}
-                  <input type="radio" name="admin"/> Admin
+                  {user.is_admin === 1 ? (
+                    <>
+                      <input type="radio" checked readOnly /> Admin
+                    </>
+                  ) : (
+                    <>
+                      <input type="radio" readOnly /> Admin
+                    </>
+                  )}
                 </div>
               </div>
             </div>
