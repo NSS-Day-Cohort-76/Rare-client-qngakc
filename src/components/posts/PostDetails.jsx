@@ -4,6 +4,8 @@ import { getPostById } from "../../services/postService";
 import "./PostDetails.css";
 import { getAllTags } from "../../services/TagService.jsx";
 import { getAllCategories } from "../../services/categoryService.js";
+import { AddReactionToPost } from "../reactions/AddReactionToPost.jsx";
+
 
 export const PostDetails = () => {
   const [post, setPost] = useState({});
@@ -49,6 +51,7 @@ export const PostDetails = () => {
       <button>
         <Link to={`/posts/${postId}/comments`}>Comments</Link>
       </button>
+      <AddReactionToPost postId={postId} />
       <Outlet />
     </div>
   );
