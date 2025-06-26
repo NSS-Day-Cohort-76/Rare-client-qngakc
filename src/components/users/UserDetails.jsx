@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getOneUser } from "../../services/userService";
+import { getSingleUser } from "../../services/userService";
 import "./UserDetails.css";
 
 export const UserDetails = () => {
@@ -8,7 +8,7 @@ export const UserDetails = () => {
   const { userId } = useParams();
 
   useEffect(() => {
-    getOneUser(userId).then(setUser);
+    getSingleUser(userId).then(setUser);
   }, []);
 
   const handleAdminCHange = () => {};
