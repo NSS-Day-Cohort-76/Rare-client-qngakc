@@ -4,8 +4,10 @@ import { getPostById } from "../../services/postService";
 import "./PostDetails.css";
 import { getAllTags } from "../../services/TagService.jsx";
 import { getAllCategories } from "../../services/categoryService.js";
+import { AddReactionToPost } from "../reactions/AddReactionToPost.jsx";
 
-export const PostDetails = () => {
+
+export const PostDetails = ({token}) => {
   const [post, setPost] = useState({});
   const [tags, setTags] = useState([]);
   const [category, setCategory] = useState([]);
@@ -49,6 +51,7 @@ export const PostDetails = () => {
       <button>
         <Link to={`/posts/${postId}/comments`}>Comments</Link>
       </button>
+      <AddReactionToPost postId={postId}  token={token}/>
       <Outlet />
     </div>
   );

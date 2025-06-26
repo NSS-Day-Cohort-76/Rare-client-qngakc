@@ -17,3 +17,14 @@ export const deleteReaction = (reactionId) => {
         method: "DELETE",
     })
 } 
+
+
+export const addNewReactionToPost = (reaction) => {
+    return fetch('http://localhost:8088/PostReactions',{
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(reaction)
+    }).then(res => res.json())
+}

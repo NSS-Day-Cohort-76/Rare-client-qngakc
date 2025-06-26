@@ -33,7 +33,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/new-post" element={<PostForm token={token} />} />
           <Route
             path="/posts/:postId"
-            element={<PostDetails setToken={setToken} />}
+            element={<PostDetails token={token} setToken={setToken} />}
           >
             <Route path="comments" element={<Comment token={token} />} />
           </Route>

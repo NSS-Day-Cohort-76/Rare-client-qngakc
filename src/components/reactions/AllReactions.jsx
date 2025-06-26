@@ -31,15 +31,15 @@ export const AllReactions = () => {
                 <div className="reactions-column">
                     {reactions.map((reaction) => (
                         <div className="map-item" key={reaction.id}>
-                            <p><strong>{reaction.label}</strong></p>
                             {reaction.emoji ?
                                 <span className="Emoji_reaction_manage" alt={reaction.label}>{reaction.emoji}
                                 </span> : <img className="img-reaction-manage" src={reaction.img_url} alt="reaction.label" />}
-                            <div className="btn-container">
+        
+                            <p><strong>{reaction.label}</strong></p>
                                 {/* <button className="button is-small is-info mr-2" onClick={() => handleEditClick(tag)}>Edit</button> */}
                                 <button className="button is-small is-danger"
                                     onClick={() => handleDelete(reaction)}>Delete</button>
-                            </div>
+                        
                         </div>
                     ))}
                 </div>
