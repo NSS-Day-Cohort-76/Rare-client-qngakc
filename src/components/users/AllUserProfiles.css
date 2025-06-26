@@ -10,10 +10,21 @@
   margin-top: 5rem;
   text-align: center;
 }
-#user-checks {
+
+.user-checks {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  flex-direction: row;
+  padding: 0 0.5rem;
+  /* border: 1px solid black; */
+  /* width: 20%; */
+}
+
+.checks-column {
+  display: flex;
   flex-direction: row;
   border: 1px solid black;
-  width: 20%;
+  align-items: center;
+  padding: 1rem;
+  /* width: 20%; */
 }
