@@ -1,17 +1,57 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getOneUser } from "../../services/userService";
+import { createSubscribe, deleteSubscribe, getOneUser, getSubscribedList } from "../../services/userService";
 import "./UserDetails.css";
 
-export const UserDetails = () => {
+export const UserDetails = ({ token }) => {
   const [user, setUser] = useState({});
+  const [users, setUsers] = useState([]);
+  // const [subscribed, setSubscribed] = useState(false);
+  const [subscribedList, setSubscribedList] = useState([]);
   const { userId } = useParams();
 
   useEffect(() => {
     getOneUser(userId).then(setUser);
   }, []);
 
+  useEffect(() => {
+    getOneUser(userId).then(setUsers);
+  }, [userId]);
+
+  useEffect(() => {
+    getSubscribedList().then(setSubscribedList);
+  }, []);
+
   const handleAdminCHange = () => {};
+
+  const handleSubscribe = () => {
+    const sub = {
+      follower_id: token,
+      author_id: userId,
+      created_on: new Date(),
+    };
+    createSubscribe(userId, sub).then(() => {
+      getSubscribedList().then(setSubscribedList);
+    });
+  };
+
+  const handleDeleteSubscribe = () => {
+    const sub = subscribedList.find(
+      (list) =>
+        parseInt(token) === list.follower_id &&
+        parseInt(userId) === list.author_id
+    );
+
+    deleteSubscribe(sub.id).then(() => {
+      getSubscribedList().then(setSubscribedList);
+    });
+  };
+
+  const findOneListItem = subscribedList.some(
+    (sub) =>
+      parseInt(token) === sub.follower_id && parseInt(userId) === sub.author_id
+  );
+
   if (!user.id) return null;
   return (
     <section id="user-details-container">
@@ -46,6 +86,17 @@ export const UserDetails = () => {
           </div>
           <div className={`${"user-row"} ${"title is-4"}`}>
             Profile Type: {user.is_admin === 1 ? "Admin" : "Author"}
+          </div>
+          <div>
+            {token === userId ? null : (
+              <button
+                onClick={() => {
+                  findOneListItem ? handleDeleteSubscribe() : handleSubscribe();
+                }}
+              >
+                {findOneListItem ? "Unsubscribe" : "Subscribe"}
+              </button>
+            )}
           </div>
         </div>
       </div>
