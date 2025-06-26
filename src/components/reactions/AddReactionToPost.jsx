@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { addNewReactionToPost, getAllReactions } from "../../services/reactionService"
 import "./AddReaction.css"
 
-export const AddReactionToPost = ({postId}) => {
+export const AddReactionToPost = ({postId, token}) => {
     const [reactions, setReactions] = useState([])
-    const [postReaction, setPostReaction] = useState([])
+
     const [isPopupOpen, setIsPopupOpen] = useState(false)
 
     useEffect(() => {
@@ -14,10 +14,9 @@ export const AddReactionToPost = ({postId}) => {
    
 
   const handleReact = (reactionId) => {
-  const userId = localStorage.getItem("rare_user_id");
 
   const newReaction = {
-    user_id: parseInt(userId),
+    user_id: parseInt(token),
     reaction_id: reactionId,
     post_id: parseInt(postId),
   };
