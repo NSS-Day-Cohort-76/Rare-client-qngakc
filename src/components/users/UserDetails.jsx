@@ -11,6 +11,7 @@ export const UserDetails = () => {
     getUserById(userId).then(setUser);
   }, []);
 
+  const handleAdminCHange = () => {};
   if (!user.id) return null;
   return (
     <section id="user-details-container">
