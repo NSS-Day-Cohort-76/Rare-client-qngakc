@@ -14,23 +14,10 @@
   border: 1px solid black;
 }
 
-/* #buttons {
-  border: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 0.5rem;
-} */
 .posts-row {
   display: flex;
   flex-direction: row;
   width: 100%;
-}
-
-.button-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .posts-column {
@@ -41,14 +28,14 @@
   border: 1px solid black;
 }
 
-/* .action-icons {
-  display: flex;
-  flex-direction: column;
+#button-column {
+  flex: 1;
   justify-content: center;
+  padding: 0.75rem;
+  display: flex;
   align-items: center;
-  padding: 0 0.5rem;
-  background-color: none;
-} */
+  border: 1px solid black;
+}
 
 .icon-button {
   background: none;
@@ -63,11 +50,9 @@
   color: crimson;
 }
 
-#conditional-buttons {
+.post-wrapper {
   display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-top: 5rem;
-  /* border: 5px solid red; */
-  margin-left: auto;
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
 }
