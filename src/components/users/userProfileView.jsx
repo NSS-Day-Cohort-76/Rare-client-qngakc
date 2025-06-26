@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
-import { createSubscribe, getOneUser } from "../../services/userService.jsx";
+import {
+  createSubscribe,
+  deleteSubscribe,
+  getOneUser,
+  getSubscribedList,
+} from "../../services/userService.jsx";
 import { useParams } from "react-router-dom";
 
 export const UserProfileView = ({ token }) => {
   const [users, setUsers] = useState([]);
-  const [subscribed, setSubscribed] = useState(false)
+  // const [subscribed, setSubscribed] = useState(false);
+  const [subscribedList, setSubscribedList] = useState([]);
   const { userId } = useParams();
 
   useEffect(() => {
     getOneUser(userId).then(setUsers);
   }, [userId]);
+
+  useEffect(() => {
+    getSubscribedList().then(setSubscribedList);
+  }, []);
 
   const handleSubscribe = () => {
     const sub = {
@@ -17,8 +27,27 @@ export const UserProfileView = ({ token }) => {
       author_id: userId,
       created_on: new Date(),
     };
-    createSubscribe(userId, sub).then();
+    createSubscribe(userId, sub).then(() => {
+      getSubscribedList().then(setSubscribedList);
+    });
   };
+
+  const handleDeleteSubscribe = () => {
+    const sub = subscribedList.find(
+      (list) =>
+        parseInt(token) === list.follower_id &&
+        parseInt(userId) === list.author_id
+    );
+
+    deleteSubscribe(sub.id).then(() => {
+      getSubscribedList().then(setSubscribedList);
+    });
+  };
+
+  const findOneListItem = subscribedList.some(
+    (sub) =>
+      parseInt(token) === sub.follower_id && parseInt(userId) === sub.author_id
+  );
 
   return (
     <>
@@ -32,8 +61,7 @@ export const UserProfileView = ({ token }) => {
             </div>
             <div className="media-content">
               <p className="title is-4">
-                {users.first_name}
-                {users.last_name}
+                {users.first_name} {users.last_name}
               </p>
             </div>
           </div>
@@ -43,14 +71,18 @@ export const UserProfileView = ({ token }) => {
             <br />
             <time>{users.created_on}</time>
           </div>
-          {token === userId ? (
-            ""
-          ) : (
-            <button onClick={() => {handleSubscribe(); setSubscribed(!subscribed) }}>{subscribed ? "Unsubscribe" : "Subscribe"}</button>
+
+          {token === userId ? null : (
+            <button
+              onClick={() => {
+                findOneListItem ? handleDeleteSubscribe() : handleSubscribe();
+              }}
+            >
+              {findOneListItem ? "Unsubscribe" : "Subscribe"}
+            </button>
           )}
         </div>
       </div>
-      ;
     </>
   );
 };
