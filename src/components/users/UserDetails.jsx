@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSubscribe, deleteSubscribe, getOneUser, getSubscribedList } from "../../services/userService";
+import { getSingleUser } from "../../services/userService";
 import "./UserDetails.css";
 
 export const UserDetails = ({ token }) => {
@@ -11,7 +12,7 @@ export const UserDetails = ({ token }) => {
   const { userId } = useParams();
 
   useEffect(() => {
-    getOneUser(userId).then(setUser);
+    getSingleUser(userId).then(setUser);
   }, []);
 
   useEffect(() => {
