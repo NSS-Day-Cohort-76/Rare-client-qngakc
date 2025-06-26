@@ -7,14 +7,32 @@ export const getOneUser = (id) => {
 };
 
 export const createSubscribe = (token, userId) => {
-  return fetch(`http://localhost:8088/subscription/${token}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userId),
-  });
-};
+    return fetch(`http://localhost:8088/subscription/${token}`, {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(userId)
+    })
+}
+
+export const getSubscribedList = () => {
+    return fetch(`http://localhost:8088/subscription`).then(res => res.json())
+}
+
+export const deleteSubscribe = (id) => {
+    return fetch(`http://localhost:8088/subscription/${id}`, {
+        method: "DELETE"
+    })
+}
+//   return fetch(`http://localhost:8088/subscription/${token}`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(userId),
+//   });
+// };
 
 export const getSingleUser = (userId) => {
   return fetch(`http://localhost:8088/users/${userId}`).then((res) =>

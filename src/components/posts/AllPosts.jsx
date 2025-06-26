@@ -21,6 +21,8 @@ export const AllPosts = ({ token }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [checked, setChecked] = useState(false);
   const [admin, setAdmin] = useState({});
+  const [searchBar, setSearchBar] = useState("");
+
   //  working to add checkboxes that are filled by the previous approved value for each post
   const navigate = useNavigate();
   const userId = parseInt(token);
@@ -85,13 +87,17 @@ export const AllPosts = ({ token }) => {
             .split(",")
             .map((tag) => tag.trim())
             .includes(selectedTag));
+      const matchesSearch =
+        searchBar === "" ||
+        post.title.toLowerCase().includes(searchBar.toLowerCase());
 
       return (
         isApproved &&
         isPublished &&
         matchesCategory &&
         matchesUser &&
-        matchesTag
+        matchesTag &&
+        matchesSearch
       );
     })
     .toSorted(
@@ -100,6 +106,16 @@ export const AllPosts = ({ token }) => {
 
   return (
     <>
+      <input
+        type="text"
+        placeholder="Search post titles"
+        value={searchBar}
+        onChange={(e) => setSearchBar(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+          }
+        }}
+      />
       <select
         value={selectedCategory || ""}
         onChange={(e) => setSelectedCategory(e.target.value || null)}
