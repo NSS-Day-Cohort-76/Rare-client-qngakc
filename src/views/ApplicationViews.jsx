@@ -49,10 +49,7 @@ export const ApplicationViews = ({ token, setToken }) => {
             path="/users"
             element={<AllUserProfiles setToken={setToken} />}
           />
-          <Route
-            path="/users/:userId"
-            element={<UserDetails setToken={setToken} />}
-          />
+          <Route path="users/:userId" element={<UserDetails token={token} />} />
         </Route>
       </Routes>
     </>
