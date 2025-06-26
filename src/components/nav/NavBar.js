@@ -1,12 +1,18 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "./rare.jpeg";
+import { getSingleUser } from "../../services/userService";
 
 export const NavBar = ({ token, setToken }) => {
   const navigate = useNavigate();
   const navbar = useRef();
   const hamburger = useRef();
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    getSingleUser(parseInt(token)).then(setCurrentUser);
+  }, []);
 
   const showMobileNavbar = () => {
     hamburger.current.classList.toggle("is-active");
@@ -63,9 +69,11 @@ export const NavBar = ({ token, setToken }) => {
               <Link to="/myposts" className="navbar-item">
                 My Posts
               </Link>
-              <Link to="/users" className="navbar-item">
-                User Profiles
-              </Link>
+              {currentUser?.admin_id === 1 && (
+                <Link to="/users" className="navbar-item">
+                  User Profiles
+                </Link>
+              )}
             </>
           ) : (
             ""

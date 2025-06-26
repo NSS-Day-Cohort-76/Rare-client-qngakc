@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../services/userService";
+import {
+  deactivateUser,
+  getAllUsers,
+  toggleActiveStatus,
+} from "../../services/userService";
 import "./AllUserProfiles.css";
 import { Link, Outlet } from "react-router-dom";
 
@@ -9,6 +13,26 @@ export const AllUserProfiles = () => {
   useEffect(() => {
     getAllUsers().then(setUsers);
   }, []);
+
+  const handleToggleActive = (e) => {
+    const userId = parseInt(e.target.value);
+    const isChecked = e.target.checked;
+
+    if (
+      window.confirm(
+        `Confirm ${isChecked ? "activation" : "deactivation"} of user?`
+      )
+    ) {
+      toggleActiveStatus(userId, isChecked ? 1 : 0).then(() => {
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user.id === userId ? { ...user, active: isChecked ? 1 : 0 } : user
+          )
+        );
+      });
+    }
+  };
+
   return (
     <>
       <h2 className="title is-2" id="user-title">
@@ -25,15 +49,17 @@ export const AllUserProfiles = () => {
                 {user.first_name} {user.last_name}
               </div>
               <div className="column">
-                {user.active === 1 ? (
-                  <>
-                    <input type="checkbox" checked readOnly /> Active
-                  </>
-                ) : (
-                  <>
-                    <input type="checkbox" readOnly /> Active
-                  </>
-                )}
+                <input
+                  type="checkbox"
+                  value={user.id}
+                  checked={user.active === 1}
+                  onChange={handleToggleActive}
+                  style={{
+                    opacity: 1,
+                    cursor: "pointer",
+                  }}
+                />{" "}
+                Active
               </div>
 
               <div className="column" id="user-checks">
