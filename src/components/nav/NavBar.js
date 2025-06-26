@@ -69,7 +69,7 @@ export const NavBar = ({ token, setToken }) => {
               <Link to="/myposts" className="navbar-item">
                 My Posts
               </Link>
-              {currentUser?.admin_id === 1 && (
+              {currentUser?.is_admin === 1 && (
                 <Link to="/users" className="navbar-item">
                   User Profiles
                 </Link>
