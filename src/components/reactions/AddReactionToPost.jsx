@@ -23,12 +23,12 @@ export const AddReactionToPost = ({postId, token}) => {
 
   addNewReactionToPost(newReaction)
     .then(() => {
-      setIsPopupOpen(false); 
+      setIsPopupOpen(false)
     })
     .catch((err) => {
-      console.error("Error adding reaction:", err);
-    });
-};
+      console.error("Error adding reaction:", err)
+    })
+}
 
     return (
         <div className="reaction-container">
