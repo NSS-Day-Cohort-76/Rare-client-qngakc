@@ -83,6 +83,8 @@ export const AllUserProfiles = () => {
                     onChange={handleToggleAdmin}
                   />
                   Author
+                </div>{" "}
+                <div className="user-checks">
                   <input
                     type="radio"
                     name={`adminStatus-${user.id}`}

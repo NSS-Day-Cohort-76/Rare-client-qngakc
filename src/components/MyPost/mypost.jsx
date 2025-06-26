@@ -45,11 +45,15 @@ export const MyPost = ({ token }) => {
                       </Link>
                     </div>
                     <div className="column">{post.author}</div>
-                    <div className="column">{post.publication_date}</div>
+                    <div className="column">
+                      {post.publication_date.slice(0, 10)}
+                    </div>
                     <div className="column">{post.category}</div>
                     <div className="column">Tags</div>
                   </div>
                 );
+              } else {
+                return "";
               }
             })}
           </div>
