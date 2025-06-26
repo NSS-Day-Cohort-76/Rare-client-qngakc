@@ -14,6 +14,7 @@ import { EditPost } from "../components/posts/EditPost.jsx";
 import { AllUserProfiles } from "../components/users/AllUserProfiles.jsx";
 import { UserProfileView } from "../components/users/userProfileView.jsx";
 import { AllReactions } from "../components/reactions/AllReactions.jsx";
+import { UserDetails } from "../components/users/UserDetails.jsx";
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -46,9 +47,10 @@ export const ApplicationViews = ({ token, setToken }) => {
           />
           <Route
             path="/users"
-            element={<AllUserProfiles setToken={setToken} />}/>
-            <Route path="users/:userId" element={<UserProfileView token={token} />} />
-          </Route>
+            element={<AllUserProfiles setToken={setToken} />}
+          />
+          <Route path="users/:userId" element={<UserDetails token={token} />} />
+        </Route>
       </Routes>
     </>
   );
