@@ -140,53 +140,47 @@ export const AllPosts = ({ token }) => {
       </select>
 
       <article id="all-posts-container">
-        <div id="all-posts-table">
-          <div className="posts-row">
-            <div className="posts-column">Actions</div>
-            <div className="posts-column">Title</div>
-            <div className="posts-column">Author</div>
-            <div className="posts-column">Date</div>
-            <div className="posts-column">Category</div>
-            <div className="posts-column">Tags</div>
-            {admin.admin_id && <div className="posts-column">Approved</div>}
+        <div id="posts-table">
+          <div className="row">
+            <div className="column"></div>
+            <div className="column">Title</div>
+            <div className="column">Author</div>
+            <div className="column">Date</div>
+            <div className="column">Category</div>
+            <div className="column">Tags</div>
+            {admin.admin_id && <div className="column">Approved</div>}
           </div>
 
           {filteredPosts.map((post) => (
-            <div className="post-wrapper" key={post.id}>
-              <div className="posts-row" key={post.id}>
-                <div id="button-column">
-                  {post.author_id === userId && (
-                    <>
-                      <button
-                        className="icon-button"
-                        onClick={() => handleEdit(post.id)}
-                        title="Edit Post"
-                      >
-                        ⚙️
-                      </button>
-                      <button
-                        className="icon-button"
-                        onClick={() => handleDelete(post.id)}
-                        title="Delete Post"
-                      >
-                        🗑️
-                      </button>
-                    </>
-                  )}
+            <div className="post-row-container" key={post.id}>
+              {post.author_id === userId && (
+                <div className="action-icons">
+                  <button
+                    className="icon-button"
+                    onClick={() => handleDelete(post.id)}
+                    title="Delete Post"
+                  >
+                    🗑️
+                  </button>
+                  <button
+                    className="icon-button"
+                    onClick={() => handleEdit(post.id)}
+                    title="Edit Post"
+                  >
+                    ⚙️
+                  </button>
                 </div>
-
-                <div className="posts-column">
+              )}
+              <div className="row">
+                <div className="column">
                   <Link to={`/posts/${post.id}`}>{post.title}</Link>
                 </div>
-                <div className="posts-column">{post.author}</div>
-                <div className="posts-column">
-                  {post.publication_date.slice(0, 10)}
-                </div>
-                <div className="posts-column">{post.category}</div>
-                <div className="posts-column">{post.tags}</div>
-
+                <div className="column">{post.author}</div>
+                <div className="column">{post.publication_date}</div>
+                <div className="column">{post.category}</div>
+                <div className="column">{post.tags}</div>
                 {admin.admin_id && (
-                  <div className="posts-column">
+                  <div className="column">
                     <input
                       type="checkbox"
                       checked={checked[post.id] || false}
