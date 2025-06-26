@@ -1,58 +1,64 @@
-#all-posts-container {
-  display: flex;
-  width: 80%;
-  justify-content: center;
-  margin: 0 auto;
-  /* border: 1px solid #444; */
-}
-
-#all-posts-table {
+#posts-table {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 5rem 0;
-  border: 1px solid black;
+  width: 90%;
+  margin: 5rem auto 0;
+  border: 1px solid #444;
 }
 
-.posts-row {
+.row {
   display: flex;
-  flex-direction: row;
   width: 100%;
+  border-top: 1px solid #444;
 }
 
-.posts-column {
+#posts-table .row:first-child {
+  background-color: #222;
+  font-weight: bold;
+}
+
+/* Each "cell" in the table */
+.column {
   flex: 1;
   padding: 0.75rem;
+  border-right: 1px solid #444;
   display: flex;
   align-items: center;
-  border: 1px solid black;
+  box-sizing: border-box;
 }
 
-#button-column {
-  flex: 1;
+.column:last-child {
+  border-right: none;
+}
+
+/* Container for each full row, includes icons */
+.post-row-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Delete + Edit icon column */
+.action-icons {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding: 0.75rem;
-  display: flex;
   align-items: center;
-  border: 1px solid black;
+  padding: 0 0.5rem;
+  background-color: none;
+  border-right: 1px solid #444;
 }
 
+/* Buttons */
 .icon-button {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   color: #ccc;
-  margin: 0 0.3rem;
+  margin: 0.2rem 0;
 }
 
 .icon-button:hover {
   color: crimson;
-}
-
-.post-wrapper {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: stretch;
 }
