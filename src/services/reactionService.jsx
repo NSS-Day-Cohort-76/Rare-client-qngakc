@@ -28,3 +28,18 @@ export const addNewReactionToPost = (reaction) => {
         body: JSON.stringify(reaction)
     }).then(res => res.json())
 }
+
+export const getPostReactions = (postId) => {
+  return fetch(`http://localhost:8088/PostReactions/${postId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then((res) => res.json());
+};
+
+export const deletePostReaction = (PostReactionId) => {
+    return fetch(`http://localhost:8088/PostReactions/${PostReactionId}`, {
+        method: "DELETE",
+    })
+} 

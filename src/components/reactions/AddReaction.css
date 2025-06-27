@@ -1,38 +1,31 @@
-.reaction-container {
-  width: 100%;
-  text-align: center;
-}
-
-.reaction-box {
-  width: 40%;
+#post-details-container {
+  max-width: 1200px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 35px;
-  border: 2px solid #fff;
-  border-radius: 20px/50px;
-  background-clip: padding-box;
 }
 
-
-.reaction-overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
+.post-reaction-btn {
+  background: bisque;
+  border: 1px solid rgb(224, 193, 154);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  align-content: center;
   justify-content: center;
-  align-items: center;
-  z-index: 1000;
 }
-.reaction-btn {
-    font-size: 30px;
-    height: 50px;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.post-reaction-count {
+  font-size: 14px;
+  color: #444;
+}
+
+.post-reaction-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0 10px;
 }
 
 .react-to-post-popup {
@@ -68,22 +61,28 @@
   color: #48c78e;
 }
 
-.reaction-popup {
-  margin-top: 20px;
+.reaction-box {
+  display: flex; /* ensure horizontal layout */
+  flex-wrap: wrap; /* wrap if needed */
+  align-items: center;
+  justify-content: center;
 }
 
-.reaction-list {
-  list-style: none;
-  padding: 0;
+.reaction-btn {
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
+}
+
+.reaction-container {
+  text-align: center;
 }
 
 .reaction-item {
   font-size: 24px;
-  padding: 8px;
   border-radius: 10px;
   background: #f4f4f4;
   display: flex;
@@ -96,6 +95,46 @@
   height: 24px;
   object-fit: contain;
 }
+
+.reaction-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.reaction-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.reaction-popup {
+  margin-top: 20px;
+}
+
+.reactions-post-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+}
+
+
 
 @media screen and (max-width: 700px) {
   .reaction-box {
