@@ -20,6 +20,10 @@ export const getSubscribedList = () => {
     return fetch(`http://localhost:8088/subscription`).then(res => res.json())
 }
 
+export const getSubscribedAuthorPost = (id) => {
+    return fetch(`http://localhost:8088/subscription/${id}`).then(res => res.json())
+}
+
 export const deleteSubscribe = (id) => {
     return fetch(`http://localhost:8088/subscription/${id}`, {
         method: "DELETE"
@@ -47,5 +51,15 @@ export const toggleActiveStatus = (userId, status) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ active: status }),
+  });
+};
+
+export const toggleAdminStatus = (userId, status) => {
+  return fetch(`http://localhost:8088/users_admin/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ is_admin: status }),
   });
 };
