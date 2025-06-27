@@ -13,15 +13,15 @@ export const AddReactionToPost = ({postId, token, refreshReactions}) => {
     }, [])
 
     useEffect(() => {
-        console.log("Fetching reactions for post:", postId);
+        console.log("Fetching reactions for post:", postId)
         getPostReactions(postId)
             .then(setPostReactions)
-            .catch((err) => console.error("Error loading reactions:", err));
-    }, [postId]);
+            .catch((err) => console.error("Error loading reactions:", err))
+    }, [postId])
 
     useEffect(() => {
-        refreshReactions();
-    }, [postId]);
+        refreshReactions()
+    }, [postId])
 
 
   const handleReact = (reactionId) => {
@@ -33,9 +33,9 @@ export const AddReactionToPost = ({postId, token, refreshReactions}) => {
 
   addNewReactionToPost(newReaction)
     .then(() => {
-      setIsPopupOpen(false);
+      setIsPopupOpen(false)
       if (refreshReactions) {
-        refreshReactions();
+        refreshReactions()
       }
     })
     .catch((err) => {
