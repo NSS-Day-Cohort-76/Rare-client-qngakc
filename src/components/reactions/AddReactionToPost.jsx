@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { addNewReactionToPost, getAllReactions } from "../../services/reactionService"
+import { addNewReactionToPost, getAllReactions, getPostReactions } from "../../services/reactionService"
 import "./AddReaction.css"
 
-export const AddReactionToPost = ({postId, token}) => {
+export const AddReactionToPost = ({postId, token, refreshReactions}) => {
     const [reactions, setReactions] = useState([])
+    const [PostReactions, setPostReactions] = useState([])
 
     const [isPopupOpen, setIsPopupOpen] = useState(false)
 
@@ -11,10 +12,19 @@ export const AddReactionToPost = ({postId, token}) => {
         getAllReactions().then((data) => setReactions(data))
     }, [])
 
-   
+    useEffect(() => {
+        console.log("Fetching reactions for post:", postId);
+        getPostReactions(postId)
+            .then(setPostReactions)
+            .catch((err) => console.error("Error loading reactions:", err));
+    }, [postId]);
+
+    useEffect(() => {
+        refreshReactions();
+    }, [postId]);
+
 
   const handleReact = (reactionId) => {
-
   const newReaction = {
     user_id: parseInt(token),
     reaction_id: reactionId,
@@ -23,18 +33,21 @@ export const AddReactionToPost = ({postId, token}) => {
 
   addNewReactionToPost(newReaction)
     .then(() => {
-      setIsPopupOpen(false)
+      setIsPopupOpen(false);
+      if (refreshReactions) {
+        refreshReactions();
+      }
     })
     .catch((err) => {
-      console.error("Error adding reaction:", err)
-    })
+      console.error("Error adding reaction:", err);
+    });
 }
 
+
     return (
-        <div className="reaction-container">
-            <div className="reaction-box">
-                <button className="button" onClick={() => setIsPopupOpen(true)}><img src="https://ik.imagekit.io/b0xq0alh4/rare-emoticon.png?updatedAt=1750955833725" alt="rare-emoticon"/></button>
-            </div>
+        <div className="reaction-box">
+            
+                <button className="button" onClick={() => setIsPopupOpen(true)}><img src="https://ik.imagekit.io/b0xq0alh4/rare-emoticon.png?updatedAt=1750955833725" alt="rare-emoticon"/>+</button>
 
             {isPopupOpen && (
                 <div className="reaction-overlay">
