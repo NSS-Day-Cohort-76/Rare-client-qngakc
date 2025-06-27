@@ -15,9 +15,6 @@ export const PostDetails = ({ token }) => {
   const [category, setCategory] = useState([]);
   const { postId } = useParams();
   const postCategory = category.find((c) => c.id === post.category_id);
-  const [reactions, setReactions] = useState([]);
-
-
   const [postReactions, setPostReactions] = useState([]);
 
   const refreshReactions = () => {
