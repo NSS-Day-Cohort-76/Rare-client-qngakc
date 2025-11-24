@@ -1,0 +1,32 @@
+#post-details-container {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  flex-direction: column;
+  /* border: 1px solid black; */
+  align-items: center;
+  padding: 1rem;
+}
+
+#post-details-container h1 {
+  font-size: 50px;
+  padding: 1rem;
+}
+
+#post-img img {
+  width: 600px;
+  height: 200px;
+}
+
+#post-details {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid black; */
+  width: 600px;
+}
+
+#post-content {
+  margin-top: 1rem;
+  font-size: 20px;
+}
