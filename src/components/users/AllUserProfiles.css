@@ -1,0 +1,30 @@
+#users-table {
+  display: flex;
+  border: 1px solid black;
+  width: 45%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+#user-title {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.user-checks {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: row;
+  padding: 0 0.5rem;
+  /* border: 1px solid black; */
+  /* width: 20%; */
+}
+
+.checks-column {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  align-items: center;
+  padding: 1rem;
+  /* width: 20%; */
+}
